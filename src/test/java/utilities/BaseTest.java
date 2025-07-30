@@ -1,5 +1,8 @@
 package utilities;
 
+import java.io.File;
+
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -21,5 +24,19 @@ public void masterSetup(){
 @AfterMethod(alwaysRun = true)
 public void masterTearDown(){
     Logs.info("TearDown del padre");
+}
+
+private static DesiredCapabilities getDesiredCapabilities(){
+    final var desiredCapabilities = new DesiredCapabilities();
+
+    final var fileAPK = new File("src/test/resources/apk/sauceLabs.apk");
+    
+    desiredCapabilities.setCapability("appium:autoGrantPermissions", true);
+    desiredCapabilities.setCapability("appium:appWaitActivity", "com.swaglabsmobileapp.MainActivity");
+    desiredCapabilities.setCapability("appium:platformName", "Android");
+    desiredCapabilities.setCapability("appium:automationName", "UiAutomator2");
+    desiredCapabilities.setCapability("appium:app", fileAPK.getAbsolutePath());
+
+    return desiredCapabilities;
 }
 }
