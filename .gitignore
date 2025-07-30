@@ -1,0 +1,29 @@
+# Archivos y carpetas generados por Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Archivos de configuración de IDEs
+*.iml
+.idea/
+*.ipr
+*.iws
+.vscode/
+*.class
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
+
+# Archivos de configuración de TestNG
+test-output/
+
+# Reportes de Allure
+/.allure/
+/allure-report/
+/target/allure-results/
+
+# Logs generados por Log4j
+/src/test/resources/logs/
