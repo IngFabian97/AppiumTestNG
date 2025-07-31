@@ -24,6 +24,7 @@ test-output/
 /.allure/
 /allure-report/
 /target/allure-results/
+/allure-results/
 
 # Logs generados por Log4j
 /src/test/resources/logs/

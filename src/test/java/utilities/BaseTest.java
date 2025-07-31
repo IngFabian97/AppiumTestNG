@@ -37,6 +37,14 @@ public void masterTearDown(){
     driver.quit();
 }
 
+protected void sleep(int timeMS){
+    try{
+        Thread.sleep(timeMS);
+    }catch (InterruptedException interruptedException){
+        Logs.error("Error al dormir el hilo: " + interruptedException.getLocalizedMessage());
+}
+}
+
 private static AndroidDriver initDriver(){
     try{
         final var appiumUrl = "http://127.0.0.1:4723/";
@@ -53,7 +61,7 @@ private static AndroidDriver initDriver(){
 private static DesiredCapabilities getDesiredCapabilities(){
     final var desiredCapabilities = new DesiredCapabilities();
 
-    final var fileAPK = new File("src/test/java/resources/apk/sauceLabs.apk");
+    final var fileAPK = new File("src/test/resources/apk/sauceLabs.apk");
     
     desiredCapabilities.setCapability("appium:autoGrantPermissions", true);
     desiredCapabilities.setCapability("appium:appWaitActivity", "com.swaglabsmobileapp.MainActivity");
