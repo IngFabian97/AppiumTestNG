@@ -1,6 +1,5 @@
 package automation;
 
-import org.apache.logging.log4j.core.util.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

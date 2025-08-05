@@ -42,4 +42,31 @@ public class ShoppingTests extends BaseTest {
 
     }
 
+    @Test
+    public void filtroPrecioTest(){
+        Logs.info("Clicando en el boton de filtro");
+        driver.findElement(AppiumBy.accessibilityId("test-Modal Selector Button")).click();
+
+        Logs.info("Esperando que se muestren los filtros");
+        sleep(500);
+
+        Logs.info("Seleccionando el filtro de precio: bajo a alto");
+        driver.findElement(AppiumBy.androidUIAutomator("text(\"Price (low to high)\")")).click();
+
+        Logs.info("Espernado que se refresque la pagina");
+        sleep(1500);
+
+        Logs.info("Verificando la información del primer producto");
+        final var listaTitulos = driver.findElements(AppiumBy.accessibilityId("test-Item title"));
+        final var listaPrecios = driver.findElements(AppiumBy.accessibilityId("test-Price"));
+
+        final var primerTitulo = listaTitulos.get(0).getText();
+        final var primerPrecio = Double.parseDouble(listaPrecios.get(0).getText().replace("$", ""));
+
+        softAssert.assertEquals(primerTitulo, "Sauce Labs Onesie", "El titulo del primer producto no es el esperado");
+        softAssert.assertEquals(primerPrecio, 7.99, "El precio del primer producto no es el esperado");
+        softAssert.assertAll();
+
+
+    }
 }

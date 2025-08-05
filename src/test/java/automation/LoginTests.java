@@ -3,8 +3,6 @@ package automation;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.fasterxml.jackson.databind.JsonSerializable.Base;
-
 import io.appium.java_client.AppiumBy;
 import utilities.BaseTest;
 import utilities.Logs;
