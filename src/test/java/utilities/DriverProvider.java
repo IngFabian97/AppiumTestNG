@@ -5,7 +5,7 @@ import io.appium.java_client.android.AndroidDriver;
 public class DriverProvider {
     private static final ThreadLocal<AndroidDriver> threadLocal = new ThreadLocal<>();
 
-    public AndroidDriver getDriver() {
+    public AndroidDriver get() {
         return threadLocal.get();
     }
 

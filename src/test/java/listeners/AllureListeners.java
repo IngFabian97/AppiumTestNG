@@ -16,7 +16,7 @@ public class AllureListeners implements TestLifecycleListener{
         switch (status) {
             case BROKEN, FAILED -> {
                 
-                if(new DriverProvider().getDriver() != null){
+                if(new DriverProvider().get() != null){
                     FileManager.getScreenShot();
                     FileManager.getPageSource();
                 }

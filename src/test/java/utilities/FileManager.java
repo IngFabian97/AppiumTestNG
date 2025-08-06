@@ -25,7 +25,7 @@ public class FileManager {
             Logs.debug("Creandos los directorios padres si no existen");
             if(file.getParentFile().mkdirs()){
                 final var fileWriter = new FileWriter(file);
-                final var pageSource = new DriverProvider().getDriver().getPageSource();
+                final var pageSource = new DriverProvider().get().getPageSource();
                 if(pageSource != null){
                     fileWriter.write(Jsoup.parse(pageSource).toString());
                 }
@@ -40,7 +40,7 @@ public class FileManager {
     public static void getScreenshot(String screenshotName){
         Logs.debug("Guardando screenshot: " + screenshotName);
         
-        final var screenshotFile = ((TakesScreenshot) new DriverProvider().getDriver()).getScreenshotAs(OutputType.FILE);
+        final var screenshotFile = ((TakesScreenshot) new DriverProvider().get()).getScreenshotAs(OutputType.FILE);
 
         final var path = String.format("%s%s.png", scrrenshotPath, screenshotName);
         try{
@@ -62,12 +62,12 @@ public class FileManager {
 
     @Attachment(value = "screenshot", type = "image/png")
     public static byte[] getScreenShot(){
-        return ((TakesScreenshot) new DriverProvider().getDriver()).getScreenshotAs(OutputType.BYTES);
+        return ((TakesScreenshot) new DriverProvider().get()).getScreenshotAs(OutputType.BYTES);
     }
 
     @Attachment(value = "pageSource", type = "text/html", fileExtension = "txt")
     public static String getPageSource() {
-        final var pageSource = new DriverProvider().getDriver().getPageSource();
+        final var pageSource = new DriverProvider().get().getPageSource();
         return pageSource != null ? Jsoup.parse(pageSource).toString() : "Error al obtener la estructura de la página";
 }
 }
