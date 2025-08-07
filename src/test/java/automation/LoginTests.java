@@ -55,7 +55,7 @@ public class LoginTests extends BaseTest{
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void taoStandarUserTest(){
         Logs.info("Haciendo tap en el label de standard_user");
         Gestures.tap(driver.findElement(AppiumBy.accessibilityId("test-standard_user")));
@@ -66,5 +66,6 @@ public class LoginTests extends BaseTest{
         Logs.info("Verificando que se llegue a la pagina de shopping");
         Assert.assertTrue(driver.findElement(AppiumBy.accessibilityId("test-PRODUCTS")).isDisplayed(), "No se llego a la pagina de shopping como se esperaba");
     }
+
 
 }

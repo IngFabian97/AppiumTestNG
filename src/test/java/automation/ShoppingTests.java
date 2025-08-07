@@ -1,10 +1,12 @@
 package automation;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.AppiumBy;
 import utilities.BaseTest;
+import utilities.Gestures;
 import utilities.Logs;
 
 public class ShoppingTests extends BaseTest {
@@ -66,6 +68,31 @@ public class ShoppingTests extends BaseTest {
         softAssert.assertEquals(primerTitulo, "Sauce Labs Onesie", "El titulo del primer producto no es el esperado");
         softAssert.assertEquals(primerPrecio, 7.99, "El precio del primer producto no es el esperado");
         softAssert.assertAll();
+
+    }
+
+    @Test(groups = {"regression, smoke"})
+    public void dragDropItemCartTest(){
+        Logs.info("Haciendo tap en el boton de formato de lista");
+        Gestures.tap(driver.findElement(AppiumBy.accessibilityId("test-Toggle")));
+
+        Logs.info("Esperando que se muestre la lista de productos");
+        sleep(1500);
+
+        final var listaBotonesAdd = driver.findElements(AppiumBy.accessibilityId("test-Drag Handle"));
+        final var primerBotonAdd = listaBotonesAdd.get(0);
+
+        final var cart = driver.findElement(AppiumBy.accessibilityId("test-Cart drop zone"));
+
+        Logs.info("Arrastrando el primer item a la zona del carrito");
+        Gestures.dragTo(primerBotonAdd, cart);
+
+        Logs.info("Esperando que se agregue el item al carrito");
+        sleep(1500);
+
+        Logs.info("Verificando que el item se haya agregado al carrito");
+        final var labelCart = driver.findElement(AppiumBy.androidUIAutomator("description(\"test-Cart\").childSelector(className(\"android.widget.TextView\"))"));
+        Assert.assertEquals(Integer.parseInt(labelCart.getText()), 1, "El item no se agrego al carrito como se esperaba");
 
 
     }
