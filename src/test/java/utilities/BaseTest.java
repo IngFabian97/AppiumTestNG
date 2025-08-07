@@ -27,6 +27,9 @@ public void masterSetup(){
     Logs.debug("Iniciando el driver");
     driver = initDriver();
 
+    Logs.debug("Asignando el implicit wait");
+    driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(5));
+
     Logs.debug("Asignando el driver a driver provider");
     new DriverProvider().setDriver(driver);
 

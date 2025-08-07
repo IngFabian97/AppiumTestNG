@@ -11,7 +11,7 @@ import utilities.Logs;
 
 public class ItemDatailsTests extends BaseTest{
 
-      @BeforeMethod(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         Logs.info("Escribiendo el username");
         driver.findElement(AppiumBy.accessibilityId("test-Username")).sendKeys("standard_user");
@@ -22,18 +22,18 @@ public class ItemDatailsTests extends BaseTest{
         Logs.info("Haciendo click en el boton de login");
         driver.findElement(AppiumBy.accessibilityId("test-LOGIN")).click(); 
 
-        Logs.info("Esperando que la pagina de shopping cargue");
-        sleep(1500);
+        // Logs.info("Esperando que la pagina de shopping cargue");
+        // sleep(1500);
 
         Logs.info("Haicnedo click en la primera imagen para ir al detalle del producto");
         driver.findElements(AppiumBy.androidUIAutomator("description(\"test-Item\").childSelector(className(\"android.widget.ImageView\"))"))
               .get(0).click();
 
-        Logs.info("Esperando que la pagina de detalle del producto cargue");
-        sleep(1500);
+        // Logs.info("Esperando que la pagina de detalle del producto cargue");
+        // sleep(1500);
     }
 
-    @Test
+    @Test(groups = {"regression, smoke"})
     public void verificarPaginaTest(){
         Logs.info("Verificando el detaller del producto");
         final var botonBackProducts= driver.findElement(AppiumBy.accessibilityId("test-BACK TO PRODUCTS"));
@@ -54,26 +54,26 @@ public class ItemDatailsTests extends BaseTest{
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void clickBackProductsTest(){
         Logs.info("Haciendo click en el boton de volver a productos");
         driver.findElement(AppiumBy.accessibilityId("test-BACK TO PRODUCTS")).click();
 
-        Logs.info("Esperando que la pagina de shopping cargue");
-        sleep(1500);
+        // Logs.info("Esperando que la pagina de shopping cargue");
+        // sleep(1500);
 
         Logs.info("Verificando que se haya regresado a la pagina de shopping");
         final var title = driver.findElement(AppiumBy.androidUIAutomator("text(\"PRODUCTS\")"));
         softAssert.assertTrue(title.isDisplayed(), "No se ha regresado a la pagina de shopping como se esperaba");
     }
 
-    @Test
+    @Test(groups = {"regression, smoke"})
     public void presionarBotonAtrasTest(){
         Logs.info("Presionando el boton de atras del dispositivo");
         driver.pressKey(new KeyEvent(AndroidKey.BACK));
 
-        Logs.info("Esperando que la pagina de shopping cargue");
-        sleep(1500);
+        // Logs.info("Esperando que la pagina de shopping cargue");
+        // sleep(1500);
 
         Logs.info("Verificando que se haya regresado a la pagina de shopping");
         final var title = driver.findElement(AppiumBy.androidUIAutomator("text(\"PRODUCTS\")"));

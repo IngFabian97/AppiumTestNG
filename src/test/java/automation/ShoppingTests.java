@@ -20,11 +20,11 @@ public class ShoppingTests extends BaseTest {
         Logs.info("Haciendo click en el boton de login");
         driver.findElement(AppiumBy.accessibilityId("test-LOGIN")).click(); 
 
-        Logs.info("Esperando que la pagina de shopping cargue");
-        sleep(1500);
+        // Logs.info("Esperando que la pagina de shopping cargue");
+        // sleep(1500);
     }
 
-    @Test
+    @Test(groups = {"regression, smoke"})
     public void verificarPaginaShoppingTest() {
         Logs.info("Verificando la pagina de shopping");
         final var title = driver.findElement(AppiumBy.androidUIAutomator("text(\"PRODUCTS\")"));
@@ -42,7 +42,7 @@ public class ShoppingTests extends BaseTest {
 
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void filtroPrecioTest(){
         Logs.info("Clicando en el boton de filtro");
         driver.findElement(AppiumBy.accessibilityId("test-Modal Selector Button")).click();
@@ -53,8 +53,8 @@ public class ShoppingTests extends BaseTest {
         Logs.info("Seleccionando el filtro de precio: bajo a alto");
         driver.findElement(AppiumBy.androidUIAutomator("text(\"Price (low to high)\")")).click();
 
-        Logs.info("Espernado que se refresque la pagina");
-        sleep(1500);
+        // Logs.info("Espernado que se refresque la pagina");
+        // sleep(1500);
 
         Logs.info("Verificando la información del primer producto");
         final var listaTitulos = driver.findElements(AppiumBy.accessibilityId("test-Item title"));

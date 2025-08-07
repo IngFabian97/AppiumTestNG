@@ -1,22 +1,24 @@
 package automation;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.AppiumBy;
 import utilities.BaseTest;
+import utilities.Gestures;
 import utilities.Logs;
 
 public class LoginTests extends BaseTest{
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
-        Logs.info("Esperando que la app cargue");
-        sleep(1500);
+        // Logs.info("Esperando que la app cargue");
+        // sleep(1500);
 
     }
 
-    @Test
+    @Test(groups = {"regression, smoke"})
     public void credencialesBloqueadasTest(){
         Logs.info("Escribiendo el username");
         driver.findElement(AppiumBy.accessibilityId("test-Username")).sendKeys("locked_out_user");
@@ -27,8 +29,8 @@ public class LoginTests extends BaseTest{
         Logs.info("Haciendo click en el boton de login");
         driver.findElement(AppiumBy.accessibilityId("test-LOGIN")).click();
 
-        Logs.info("Esperando que el mensaje de error aparezca");
-        sleep(1500);
+        // Logs.info("Esperando que el mensaje de error aparezca");
+        // sleep(1500);
 
         Logs.info("Validando que el mensaje de error sea el correcto");
         final var mensajeError = driver.findElement(AppiumBy.androidUIAutomator("text(\"Sorry, this user has been locked out.\")"));
@@ -39,7 +41,7 @@ public class LoginTests extends BaseTest{
 
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void verifciarPagTest(){
         Logs.info("Verificando la pagin de login");
         final var usernameInput = driver.findElement(AppiumBy.accessibilityId("test-Username"));
@@ -51,6 +53,18 @@ public class LoginTests extends BaseTest{
         softAssert.assertTrue(loginButton.isDisplayed(), "El boton de login no se muestra como se esperaba");
         softAssert.assertTrue(loginButton.isEnabled(), "El boton de login no esta habilitado como se esperaba");
         softAssert.assertAll();
+    }
+
+    @Test
+    public void taoStandarUserTest(){
+        Logs.info("Haciendo tap en el label de standard_user");
+        Gestures.tap(driver.findElement(AppiumBy.accessibilityId("test-standard_user")));
+
+        Logs.info("Haciendo tap en el boton de login");
+        Gestures.tap(driver.findElement(AppiumBy.accessibilityId("test-LOGIN")));
+
+        Logs.info("Verificando que se llegue a la pagina de shopping");
+        Assert.assertTrue(driver.findElement(AppiumBy.accessibilityId("test-PRODUCTS")).isDisplayed(), "No se llego a la pagina de shopping como se esperaba");
     }
 
 }

@@ -20,8 +20,8 @@ public class BurgerMenuTests extends BaseTest{
         Logs.info("Haciendo click en el boton de login");
         driver.findElement(AppiumBy.accessibilityId("test-LOGIN")).click(); 
 
-        Logs.info("Esperando que la pagina de shopping cargue");
-        sleep(1500);
+        // Logs.info("Esperando que la pagina de shopping cargue");
+        // sleep(1500);
 
         Logs.info("Abriendo el menu de hamburguesa");
         driver.findElement(AppiumBy.accessibilityId("test-Menu")).click();
@@ -29,14 +29,14 @@ public class BurgerMenuTests extends BaseTest{
         Logs.info("Esperando que el menu de hamburguesa se abra");
         sleep(2000);
     }
-
-    @Test
+    
+    @Test(groups = {"regression, smoke"})
     public void logoutTest() {
         Logs.info("Haciendo click en el boton de logout");
         driver.findElement(AppiumBy.accessibilityId("test-LOGOUT")).click();
 
-        Logs.info("Esperando que la pagina de login cargue");
-        sleep(1500);
+        // Logs.info("Esperando que la pagina de login cargue");
+        // sleep(1500);
 
         Logs.info("Validando que la pagina de login se muestre correctamente");
         final var usernameInput = driver.findElement(AppiumBy.accessibilityId("test-Username"));
@@ -49,13 +49,13 @@ public class BurgerMenuTests extends BaseTest{
         softAssert.assertAll();
     }
     
-    @Test
+    @Test(groups = {"regression"})
     public void buttonXTest() {
         Logs.info("Clicando en el boton X para cerrar el menu de hamburguesa");
         driver.findElement(AppiumBy.accessibilityId("test-Close")).click();
 
-        Logs.info("Esperando que la pagina de shopping cargue");
-        sleep(1500);    
+        // Logs.info("Esperando que la pagina de shopping cargue");
+        // sleep(1500);    
 
         Logs.info("Validando que la pagina de shopping se muestre correctamente");
         softAssert.assertTrue(driver.findElement(AppiumBy.accessibilityId("test-PRODUCTS")).isDisplayed(), "El titulo de la pagina de shopping no se muestra como se esperaba");
